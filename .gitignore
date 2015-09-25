@@ -1,0 +1,4 @@
+shard.lock
+.crystal/
+.deps/
+.shards/
