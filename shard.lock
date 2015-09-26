@@ -1,0 +1,10 @@
+version: 1.0
+shards:
+  crsfml:
+    github: BlaXpirit/crsfml
+    commit: af867233de9473e6be469ca2d5f02277ea979b51
+
+  gl:
+    github: BlaXpirit/crystal-raw-gl
+    commit: 0efa0e7764c2af07011fc7f83e5c51fd9ae334b8
+

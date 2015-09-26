@@ -1,4 +1,4 @@
-shard.lock
-.crystal/
-.deps/
-.shards/
+/doc/
+/libs/
+/.crystal/
+/.shards/
