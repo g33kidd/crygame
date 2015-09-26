@@ -1,2 +1,4 @@
-# crygame
-Just a game engine written in Crystal.
+# CryGame
+A game engine written using crystal.
+
+## More info coming soon..
