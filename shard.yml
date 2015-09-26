@@ -4,9 +4,9 @@ version: 0.0.1
 dependencies:
   gl:
     github: BlaXpirit/crystal-raw-gl
+    branch: master
   crsfml:
     github: BlaXpirit/crsfml
-
-development_dependencies:
+    branch: master
 
 license: MIT

@@ -204,7 +204,7 @@ module SF
     #
     # *Returns*: The requested name
     def get_name(index: Int)
-      index = LibC::SizeT.cast(index)
+      index = LibC::SizeT.new(index)
       ptr = CSFML.ftp_listing_response_get_name(@this, index)
       ptr ? String.new(ptr) : ""
     end
@@ -566,27 +566,6 @@ module SF
       FtpResponse.wrap_ptr(CSFML.ftp_upload(@this, local_file, dest_path, mode))
     end
 
-    # Send a command to the FTP server
-    #
-    # While the most often used commands are provided as member
-    # functions in the Ftp class, this method can be used
-    # to send any FTP command to the server. If the command
-    # requires one or more parameters, they can be specified
-    # in `parameter`. Otherwise it should be an empty string.
-    # If the server returns information, you can extract it
-    # from the response using Response_getMessage().
-    #
-    # *Arguments*:
-    #
-    # * `ftp`: Ftp object
-    # * `command`: Command to send
-    # * `parameter`: Command parameter
-    #
-    # *Returns*: Server response to the request
-    def send_command(command: String, parameter: String)
-      FtpResponse.wrap_ptr(CSFML.ftp_send_command(@this, command, parameter))
-    end
-
   end
 
   class HttpRequest
@@ -903,7 +882,7 @@ module SF
     # * `data`: Pointer to the sequence of bytes to append
     # * `size_in_bytes`: Number of bytes to append
     def append(data: Slice|Array)
-      data, size_in_bytes = (data.to_unsafe as Pointer(Void)), LibC::SizeT.cast(data.length*sizeof(typeof(data[0])))
+      data, size_in_bytes = (data.to_unsafe as Pointer(Void)), LibC::SizeT.new(data.size*sizeof(typeof(data[0])))
       CSFML.packet_append(@this, data, size_in_bytes)
     end
 
@@ -1444,7 +1423,7 @@ module SF
     #
     # *Returns*: Status code
     def send(data: Slice|Array)
-      data, size = (data.to_unsafe as Pointer(Void)), LibC::SizeT.cast(data.length*sizeof(typeof(data[0])))
+      data, size = (data.to_unsafe as Pointer(Void)), LibC::SizeT.new(data.size*sizeof(typeof(data[0])))
       CSFML.tcp_socket_send(@this, data, size)
     end
 
@@ -1461,7 +1440,7 @@ module SF
     #
     # *Returns*: Status code
     def send_partial(data: Slice|Array, sent: LibC::SizeT*)
-      data, size = (data.to_unsafe as Pointer(Void)), LibC::SizeT.cast(data.length*sizeof(typeof(data[0])))
+      data, size = (data.to_unsafe as Pointer(Void)), LibC::SizeT.new(data.size*sizeof(typeof(data[0])))
       CSFML.tcp_socket_send_partial(@this, data, size, sent)
     end
 
@@ -1480,7 +1459,7 @@ module SF
     #
     # *Returns*: Status code
     def receive(data: Slice|Array, size_received: LibC::SizeT*)
-      data, max_size = (data.to_unsafe as Pointer(Void)), LibC::SizeT.cast(data.length*sizeof(typeof(data[0])))
+      data, max_size = (data.to_unsafe as Pointer(Void)), LibC::SizeT.new(data.size*sizeof(typeof(data[0])))
       CSFML.tcp_socket_receive(@this, data, max_size, size_received)
     end
 
@@ -1633,7 +1612,7 @@ module SF
     #
     # *Returns*: Status code
     def send(data: Slice|Array, address: IpAddress, port: Int)
-      data, size = (data.to_unsafe as Pointer(Void)), LibC::SizeT.cast(data.length*sizeof(typeof(data[0])))
+      data, size = (data.to_unsafe as Pointer(Void)), LibC::SizeT.new(data.size*sizeof(typeof(data[0])))
       port = port.to_u16
       CSFML.udp_socket_send(@this, data, size, address, port)
     end
@@ -1658,7 +1637,7 @@ module SF
     #
     # *Returns*: Status code
     def receive(data: Slice|Array, size_received: LibC::SizeT*, address: IpAddress*, port: UInt16*)
-      data, max_size = (data.to_unsafe as Pointer(Void)), LibC::SizeT.cast(data.length*sizeof(typeof(data[0])))
+      data, max_size = (data.to_unsafe as Pointer(Void)), LibC::SizeT.new(data.size*sizeof(typeof(data[0])))
       CSFML.udp_socket_receive(@this, data, max_size, size_received, address, port)
     end
 
