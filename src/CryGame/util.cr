@@ -4,7 +4,6 @@ module CryGame
   extend self
 
   module Util
-    # various util stuff
   end
 
   def debug(string, type)
