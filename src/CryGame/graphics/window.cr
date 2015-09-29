@@ -1,9 +1,13 @@
 require "crsfml"
 
-class CryGame::Graphics::Window < SF::RenderWindow
+class CryGame::Window < SF::RenderWindow
 
-  def initialize(width, height)
-    super(SF.video_mode(width, height), "Test Window")
+  def initialize(title, width, height)
+    super(SF.video_mode(width, height), title)
+  end
+
+  def update
+    self.poll_window_events
   end
 
   def poll_window_events
